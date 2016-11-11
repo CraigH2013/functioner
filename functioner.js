@@ -1,6 +1,17 @@
 'use strict';
 
 var functioner = {
+  not: function() {
+    var args = Array.from(arguments);
+    return function(val) {
+      for (let i = 0; i < args.length; i++) {
+        if (args[i](val) === true) {
+          return false;
+        }
+      }
+      return true;
+    };
+  },
   type: function(t) {
     switch (t) {
       case 'string':
@@ -216,6 +227,45 @@ var functioner = {
 
       return output;
     };
+  },
+  clamp: function(a, b) {
+    var min = Math.min(a, b);
+    var max = Math.max(a, b);
+
+    return function(val) {
+      return Math.max(min, Math.min(val, max));
+    };
+  },
+  scale: function(inMin, inMax, outMin, outMax) {
+    return function(x) {
+      return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    };
+  },
+  sum: function(fn) {
+    return function(n) {
+      var total = 0;
+      for (let i = 0; i < n; i++) {
+        total += fn(i);
+      }
+      return total;
+    };
+  },
+  compose: function() {
+    var fns = Array.from(arguments);
+    return function(val) {
+      for (let i = fns.length - 1; i >= 0; i--) {
+        val = fns[i](val);
+      }
+      return val;
+    };
+  },
+  pow: function(exp) {
+    return function(base) {
+      return Math.pow(base, exp);
+    };
+  },
+  print: function(val) {
+    console.log(val);
   }
 };
 

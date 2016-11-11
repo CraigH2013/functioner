@@ -326,5 +326,14 @@ describe('functioner', function() {
     });
   });
 
-
+  describe('clamp', function() {
+    it('should give expected results', function() {
+      assert.equal(f.clamp(3, 6)(4), 4);
+      assert.equal(f.clamp(3, 6)(3), 3);
+      assert.equal(f.clamp(3, 6)(6), 6);
+      assert.equal(f.clamp(3, 6)(0), 3);
+      assert.equal(f.clamp(3, 6)(13), 6);
+      assert.equal(f.clamp(6, 3)(-1), 3);
+    });
+  });
 });

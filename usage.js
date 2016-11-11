@@ -1,3 +1,5 @@
+'use strict';
+
 var f = require('./functioner.js');
 
 // greaterThan
@@ -129,3 +131,35 @@ var odds = numbers.filter(f.odd);
 var strings = ['my', 'secret', 'messages'];
 var secret = strings.map(f.caesar(13));
 // console.log(secret);
+
+// type
+var types = ['abc', '123', 123, 1.23, {}, ['a'], true, false];
+var iters = types.filter(f.type('iterable'));
+// console.log(iters);
+
+// clamp
+var numbers = [-3, 1, 2, 6, 8, 10];
+var clamped = numbers.map(f.clamp(2, 6));
+// console.log(clamped);
+
+// scale
+var numbers = [0, 1, 2, 3, 4, 5];
+var scaled = numbers.map(f.scale(1, 4, 0, 1));
+// console.log(scaled);
+
+// sum
+var sumTo = f.sum(f.add(1));
+// the sum of the first 100 whole numbers
+// console.log(sumTo(100));
+
+// compose
+var sumBy = f.compose(f.sum, f.add);
+var sumTo = sumBy(1);
+// console.log(sumTo(100));
+
+// pow
+var cube = f.pow(3);
+// console.log(cube(2));
+
+// print
+// [1, 2, 3].forEach(f.print);
