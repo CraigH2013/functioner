@@ -1,6 +1,6 @@
 {
   "name": "functioner",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A node.js module containing a set of higher order functions",
   "main": "functioner.js",
   "scripts": {
