@@ -2,6 +2,9 @@
   "name": "functioner",
   "version": "0.2.0",
   "description": "A node.js module containing a set of higher order functions",
+  "keywords": [
+    "higher", "order", "functions", "lambda", "λ"
+  ],
   "main": "functioner.js",
   "scripts": {
     "test": "mocha"
