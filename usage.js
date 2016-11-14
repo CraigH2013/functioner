@@ -1,6 +1,14 @@
 'use strict';
 
-var f = require('./functioner.js');
+var f = require('./functioner.js').math;
+
+var numbers = [0, 1, 2, 3, 4];
+var scaled = numbers.map(f.scale(0, 4, 0, 1));
+
+var add2 = numbers.map(f.add(2));
+
+var clamped = numbers.map(f.clamp(1, 3));
+console.log(clamped);
 
 // greaterThan
 var numbers = [0, 1, 2, 3, 4, 5, 6];
@@ -26,6 +34,8 @@ var lte3 = numbers.filter(f.lte(3));
 var numbers = [0, 1, 0, 1, 0, 1];
 var eq0 = numbers.filter(f.eq(0));
 // console.log(eq0);
+
+var f = require('./functioner.js').math;
 
 // add
 var numbers = [0, 1, 2, 3, 4, 5, 6];
@@ -57,6 +67,8 @@ var people = [
 var names = people.map(f.accessor('name'));
 // console.log(names);
 
+var f = require('./functioner.js').assert;
+
 // has
 var people = [
   {name: 'Alex', sex: 'f'},
@@ -66,6 +78,12 @@ var people = [
 ];
 var hasAge = people.filter(f.has('age'));
 // console.log(hasAge);
+
+var millinials = people
+    .filter(f.has('age'))
+    .filter(f.compose(f.between(21, 40), f.accessor('age')));
+
+console.log(millinials);
 
 // index
 var matrix = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];
@@ -128,8 +146,8 @@ var odds = numbers.filter(f.odd);
 // console.log(odds);
 
 // caeser
-var strings = ['my', 'secret', 'messages'];
-var secret = strings.map(f.caesar(13));
+// var strings = ['my', 'secret', 'messages'];
+// var secret = strings.map(f.caesar(13));
 // console.log(secret);
 
 // type
@@ -138,14 +156,18 @@ var iters = types.filter(f.type('iterable'));
 // console.log(iters);
 
 // clamp
-var numbers = [-3, 1, 2, 6, 8, 10];
-var clamped = numbers.map(f.clamp(2, 6));
+// var numbers = [-3, 1, 2, 6, 8, 10];
+// var clamped = numbers.map(f.clamp(2, 6));
 // console.log(clamped);
 
 // scale
-var numbers = [0, 1, 2, 3, 4, 5];
-var scaled = numbers.map(f.scale(1, 4, 0, 1));
+// var numbers = [0, 1, 2, 3, 4, 5];
+// var scaled = numbers.map(f.scale(1, 4, 0, 1));
 // console.log(scaled);
+
+var numbers = [0, 1, 2, 3, 4, 5];
+var between1and4 = numbers.filter(f.between(1, 4));
+console.log(between1and4);
 
 // sum
 var sumTo = f.sum(f.add(1));

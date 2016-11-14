@@ -1,6 +1,7 @@
 'use strict';
 
 var assert = {
+
   not: function() {
     var args = Array.from(arguments);
     return function(val) {
@@ -12,6 +13,7 @@ var assert = {
       return true;
     };
   },
+
   type: function(t) {
     switch (t) {
       case 'string':
@@ -65,60 +67,75 @@ var assert = {
 
     }
   },
+
   greaterThan: function(x) {
     return function(val) {
       return val > x;
     };
   },
+
   gt: function(x) {
     return assert.greaterThan(x);
   },
+
   greaterThanOrEqualTo: function(x) {
     return function(val) {
       return val >= x;
     };
   },
+
   gte: function(x) {
     return assert.greaterThanOrEqualTo(x);
   },
+
   lessThan: function(x) {
     return function(val) {
       return val < x;
     };
   },
+
   lt: function(x) {
     return assert.lessThan(x);
   },
+
   lessThanOrEqualTo: function(x) {
     return function(val) {
       return val <= x;
     };
   },
+
   lte: function(x) {
     return assert.lessThanOrEqualTo(x);
   },
+
   equalTo: function(x) {
     return function(val) {
       return val === x;
     };
   },
+
   eq: function(x) {
     return assert.equalTo(x);
   },
+
   null: function(x) {
     return x === null;
   },
+
   undefined: function(x) {
     return x === undefined;
   },
+
   assigned: function(x) {
     return x !== undefined;
   },
+
   has: function(prop) {
     return function(obj) {
       return obj.hasOwnProperty(prop);
     };
   },
+
   includes: function(x) {
     return function(arr) {
       for (let i = 0; i < arr.length; i++) {
@@ -129,31 +146,38 @@ var assert = {
       return false;
     };
   },
+
   contains: function(x) {
     return function(string) {
       return string.includes(x);
     };
   },
+
   match: function(regex) {
     return function(string) {
       return regex.test(string);
     };
   },
+
   positive: function(x) {
     return x > 0;
   },
   negative: function(x) {
     return x < 0;
   },
+
   zero: function(x) {
     return x === 0;
   },
+
   infinity: function(x) {
     return x === Infinity;
   },
+
   finite: function(x) {
     return x !== Infinity;
   },
+
   between: function(a, b, inclusive) {
     var min = Math.min(a, b);
     var max = Math.max(a, b);
@@ -168,11 +192,39 @@ var assert = {
       };
     }
   },
+
   even: function(x) {
     return x % 2 === 0;
   },
+
   odd: function(x) {
     return x % 2 !== 0;
+  },
+
+  compose: function() {
+    var fns = Array.from(arguments);
+    return function(val) {
+      for (let i = fns.length - 1; i >= 0; i--) {
+        val = fns[i](val);
+      }
+      return val;
+    };
+  },
+  
+  accessor: function(access) {
+    return function(obj) {
+      return obj[access];
+    };
+  },
+
+  index: function(i) {
+    return function(arr) {
+      return arr[i];
+    };
+  },
+
+  print: function(val) {
+    console.log(val);
   }
 };
 
